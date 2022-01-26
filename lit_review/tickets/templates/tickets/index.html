@@ -1,10 +1,14 @@
-<div class="container p-5">
-    <h1>Mes tickets :</h1>
-    <ul>
-        {% for ticket in tickets %}
-            <li>
-                {{ ticket.title }}
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+{% extends 'tickets/main.html' %}
+
+{% block content %}
+    <div class="container p-5 m-0">
+        <h1>Mes tickets :</h1>
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    {{ ticket.title }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
