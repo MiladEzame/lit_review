@@ -2,13 +2,14 @@
 
 {% block content %}
     <div class="container p-5 m-0">
-        <h1>Mes tickets :</h1>
+        <h1>Dashboard :</h1>
         <ul>
             {% for ticket in tickets %}
                 <li>
-                    {{ ticket.title }}
+                    <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a>
                 </li>
             {% endfor %}
         </ul>
+        <h3>Friends tickets / comments will be updated soon.</h3>
     </div>
 {% endblock %}

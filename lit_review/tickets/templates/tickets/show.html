@@ -1,0 +1,9 @@
+{% extends 'tickets/main.html' %}
+
+{% block content %}
+    <div class="container p-5 m-0">
+        <h1>Title : {{ticket.title}}</h1>
+        <p>Content : {{ticket.content}}</p>
+        <a href="{% url 'tickets' %}">All Tickets</a>
+    </div>
+{% endblock %}
