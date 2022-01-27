@@ -34,3 +34,15 @@ def createTicket(request):
     context = {'form': form}
     return render(request, 'tickets/create_ticket.html', context)
 
+def updateTicket(request, pk):
+
+    ticket = Ticket.objects.get(id=pk)
+    form = TicketForm(instance=ticket)
+    if request.method == "POST":
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect ('tickets')
+
+    context = {'form': form}
+    return render(request, 'tickets/create_ticket.html', context)
