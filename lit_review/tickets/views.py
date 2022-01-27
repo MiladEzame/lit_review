@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from tickets.models import Ticket
 from .forms import TicketForm
 
@@ -25,6 +25,12 @@ def home(request):
 def createTicket(request):
 
     form = TicketForm()
+    if request.method == "POST":
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('tickets')
+
     context = {'form': form}
-    return render(request, 'tickets/create_order.html')
+    return render(request, 'tickets/create_ticket.html', context)
 

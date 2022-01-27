@@ -3,8 +3,8 @@
 {% block content %}
     <div class="container p-5 m-0">
         <h1>My tickets :</h1>
-        <a href="{% url 'create_order' %}">Create new Ticket</a>
-        <ul>
+        <a href="{% url 'create_ticket' %}" class="btn btn-primary mt-3 mb-5">Create new Ticket</a>
+        <ul class="list-unstyled">
             {% for ticket in tickets %}
                 <li>
                     <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a>

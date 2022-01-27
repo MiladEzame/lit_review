@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container p-5 m-0">
         <h1>Users :</h1>
-        <ul>
+        <ul class="list-unstyled">
             {% for user in users %}
                 <li>
                     <a href="{% url 'user' user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
