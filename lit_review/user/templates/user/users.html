@@ -2,11 +2,11 @@
 
 {% block content %}
     <div class="container p-5 m-0">
-        <h1>Mes tickets :</h1>
-        <ul>
-            {% for ticket in tickets %}
+        <h1>Users :</h1>
+        <ul class="list-unstyled">
+            {% for user in users %}
                 <li>
-                    {{ ticket.title }}
+                    <a href="{% url 'user' user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
                 </li>
             {% endfor %}
         </ul>
