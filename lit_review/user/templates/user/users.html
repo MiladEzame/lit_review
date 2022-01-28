@@ -4,6 +4,10 @@
     <div class="container p-5 m-0">
         <h1>Users :</h1>
         <ul class="list-unstyled">
+            <form method="get">
+                {{ myFilter.form }}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
             {% for user in users %}
                 <li>
                     <a href="{% url 'user' user.id %}">{{ user.first_name }} {{ user.last_name }}</a>

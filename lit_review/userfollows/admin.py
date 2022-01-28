@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import UserFollows
+from .models import UserFollow
 
-admin.site.register(UserFollows)
+admin.site.register(UserFollow)
