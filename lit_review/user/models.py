@@ -8,4 +8,4 @@ class User(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.first_name
+        return f'{self.first_name}'

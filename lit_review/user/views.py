@@ -3,11 +3,11 @@ from user.models import User
 from .filters import UserFilter
 
 # Create your views here.
-def users(request):
+def profile(request):
     users = User.objects.all()
     myFilter = UserFilter()
 
-    return render(request, 'user/users.html',
+    return render(request, 'user/profile.html',
                   context={'users' : users, 'myFilter': myFilter})
 
 def show(request, pk):
