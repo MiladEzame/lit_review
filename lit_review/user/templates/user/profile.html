@@ -19,7 +19,7 @@
                 <div class="followers">
                     <p>{{user.first_name}}'s followers : </p>
                     <ul class="list-unstyled">
-                        {% for follower in followed_by %}
+                        {% for follower in followers %}
                             <li>
                                 {{ follower.user }}
                             </li>
