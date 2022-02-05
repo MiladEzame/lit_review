@@ -1,13 +1,5 @@
 from django.shortcuts import render
-from .models import User, UserFollow
+from .models import UserFollow
+from django.contrib.auth.models import User
 
 # Create your views here.
-def user_followers(request):
-    user = User.objects.get(id=4)
-    followers = UserFollow.objects.filter(followed_user = user).all()
-    following = UserFollow.objects.filter(user = user).all()
-
-    return render(
-        request, 'user/profile.html', 
-        context={'user': user, 'followers': followers, 'following': following}
-    )
