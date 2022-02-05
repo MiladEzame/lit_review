@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 class UserFollow(models.Model):
@@ -9,7 +9,7 @@ class UserFollow(models.Model):
 
 
     def __str__(self):
-        return f"{self.user.first_name} follows {self.followed_user.first_name}"
+        return f"{self.user.username} follows {self.followed_user.username}"
     
     class Meta:
         # ensures we don't get multiple UserFollows instances
