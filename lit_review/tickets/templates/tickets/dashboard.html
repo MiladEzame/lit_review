@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="container p-5 m-0">
-        <h1>Dashboard :</h1>
+        <h1>Hello {{ user.first_name }}</h1>
+        <h3>Your tickets : </h3>
         <ul>
             {% for ticket in tickets %}
                 <li>
