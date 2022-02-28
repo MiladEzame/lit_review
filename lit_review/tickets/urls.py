@@ -10,8 +10,9 @@ urlpatterns = [
     path('delete_ticket/<str:pk>/', views.deleteTicket, name='delete_ticket'),
     path('tickets/<str:pk>/', views.show, name='ticket'),
     path('profile/', views.profile, name='profile'),
-    path('login/', views.login, name='login'),
-    path('register/', views.register, name='register'),
+    path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutUser, name='logout'),
+    path('register/', views.registerPage, name='register'),
     path('profile/<str:pk>/', views.show_user, name='show_user'),
     path('', views.dashboard)
 ]
