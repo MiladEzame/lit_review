@@ -1,7 +1,14 @@
-body {
+.page-container {
     min-height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
 }
+
+body {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
 
 * {
     margin: 0px;
@@ -10,6 +17,30 @@ body {
 
 footer {
     position: absolute;
+    right: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
 }
+
+.card-product p {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: .7;
+    margin-bottom: 0;
+    margin-top: 8px;
+  }
+
+.card-product {
+    overflow: hidden;
+    height: 120px;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+  }
+
+  .ticket-container {
+      height: 70%;    
+      overflow: auto;
+  }

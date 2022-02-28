@@ -1,16 +1,26 @@
 {% extends 'tickets/main.html' %}
 
 {% block content %}
-    <div class="container p-5 m-0">
-        <h1>Hello {{ user.first_name }}</h1>
-        <h3>Your tickets : </h3>
-        <ul>
-            {% for ticket in tickets %}
-                <li>
-                    <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="container">
+        <div class="ticket-container pl-2 pr-2">
+            <h1 class="mb-5 text-center">Hello {{ user.first_name }}</h1>
+            <ul class="list-unstyled">
+                {% for ticket in tickets %}
+                    <li class="mb-5">
+                        <div class="card-product d-flex justify-content-between p-2">
+                            <div>
+                                <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
+                                <p>{{ticket.content}}</p>
+                            </div>
+                            <div>
+                                <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
+                                <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         <h3>Friends tickets / comments will be updated soon.</h3>
     </div>
 {% endblock %}

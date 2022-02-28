@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def dashboard(request):
     user = request.user
-    tickets = user.ticket_set.all()
+    tickets = Ticket.objects.all()
     return render(request, 'tickets/dashboard.html',
                   context={'tickets' : tickets})
 

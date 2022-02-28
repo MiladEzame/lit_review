@@ -1,15 +1,22 @@
 {% extends 'tickets/main.html' %}
 
 {% block content %}
-    <div class="container p-5 m-0">
-        <h1>My tickets :</h1>
+    <div class="container ticket-container w-100">
+        <h1 class="text-center">My tickets :</h1>
         <a href="{% url 'create_ticket' %}" class="btn btn-primary mt-3 mb-5">Create new Ticket</a>
         <ul class="list-unstyled">
             {% for ticket in tickets %}
                 <li class="mb-3">
-                    <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a>
-                    <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
-                    <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                    <div class="card-product d-flex justify-content-between p-2">
+                        <div>
+                            <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
+                            <p>{{ticket.content}}</p>
+                        </div>
+                        <div>
+                            <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
+                            <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                        </div>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
