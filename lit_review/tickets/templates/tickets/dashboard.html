@@ -33,19 +33,15 @@
                     </li>
                 {% endfor %}
             </ul>
-            <h3>Friends feed </h3>
+            <h3 class="mb-5" >Friends feed </h3>
             <ul class="list-unstyled">
                 {% for user in followings_feed %}
-                    {% for ticket in user.ticket_set.all  %}
+                    {% for ticket in user.followed_user.ticket_set.all  %}
                         <li class="mb-3">
                             <div class="card-product d-flex justify-content-between p-2">
                                 <div>
                                     <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
                                     <p>{{ticket.content}}</p>
-                                </div>
-                                <div>
-                                    <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
-                                    <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
                                 </div>
                             </div>
                         </li>
