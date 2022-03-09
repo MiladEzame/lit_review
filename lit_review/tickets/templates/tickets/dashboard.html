@@ -7,20 +7,51 @@
             <ul class="list-unstyled">
                 {% for ticket in tickets %}
                     <li class="mb-5">
-                        <div class="card-product d-flex justify-content-between p-2">
-                            <div>
-                                <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
-                                <p>{{ticket.content}}</p>
+                        <div class="card-product d-flex flex-column">
+                            <div class="upper-ticket d-flex justify-content-between p-2">
+                                <div>
+                                    <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
+                                    <p>{{ticket.content}}</p>
+                                </div>
+                                {% if ticket.user == request.user %}
+                                    <div>
+                                        <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
+                                        <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                                    </div>
+
+                                {% endif %}
                             </div>
-                            <div>
-                                <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
-                                <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                            <div class="lower_ticket">
+                                <form method="POST">
+                                    {% csrf_token %}
+                    
+                                    {{ form }}       
+                                </form>
                             </div>
+
                         </div>
                     </li>
                 {% endfor %}
             </ul>
+            <h3>Friends feed </h3>
+            <ul class="list-unstyled">
+                {% for user in followings_feed %}
+                    {% for ticket in user.ticket_set.all  %}
+                        <li class="mb-3">
+                            <div class="card-product d-flex justify-content-between p-2">
+                                <div>
+                                    <a href="{% url 'ticket' ticket.id %}">{{ ticket.title }}</a><br>
+                                    <p>{{ticket.content}}</p>
+                                </div>
+                                <div>
+                                    <a href="{% url 'update_ticket' ticket.id %}" class="btn btn-info pt-1 pb-1 pl-3 pr-3">Edit</a>
+                                    <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger pt-1 pb-1 pl-3 pr-3">Delete</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
         </div>
-        <h3>Friends tickets / comments will be updated soon.</h3>
     </div>
 {% endblock %}

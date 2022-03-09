@@ -1,9 +1,9 @@
-from .forms import CreateUserForm, LoginForm
+from mimetypes import init
+from .forms import CreateUserForm, LoginForm, CreateReviewForm
 from .forms import TicketForm
 from .filters import UserFilter
 from tickets.models import Ticket
-from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from userfollows.models import UserFollow
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -14,8 +14,12 @@ from django.contrib.auth import authenticate, login, logout
 def dashboard(request):
     user = request.user
     tickets = Ticket.objects.all()
+    followers_feed = UserFollow.objects.filter(followed_user = user).all()
+    followings_feed = UserFollow.objects.filter(user = user).all()
     return render(request, 'tickets/dashboard.html',
-                  context={'tickets' : tickets})
+                  context={'tickets': tickets,
+                           'followers_feed': followers_feed,
+                           'followings_feed': followings_feed})
 
 
 def tickets(request):
@@ -42,21 +46,25 @@ def createTicket(request):
     if request.method == "POST":
         form = TicketForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False) 
+            obj.user = User.objects.get(pk=request.user.id)
+            obj.save() 
             return redirect ('tickets')
 
     context = {'form': form}
     return render(request, 'tickets/create_ticket.html', context)
 
-
+#@login_required
 def updateTicket(request, pk):
 
     ticket = Ticket.objects.get(id=pk)
-    form = TicketForm(instance=ticket)
+    form = TicketForm()
     if request.method == "POST":
         form = TicketForm(request.POST, instance=ticket)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False) 
+            obj.user = User.objects.get(pk=request.user.id)
+            obj.save() 
             return redirect ('tickets')
 
     context = {'form': form}
@@ -114,8 +122,20 @@ def loginPage(request):
 
     return render(request, 'tickets/login.html', context={'form': form})
 
+def createReview(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.method == 'POST':
+        form = CreateReviewForm(request.POST, instance=Ticket)
+        if form.is_valid():
+            obj = form.save(commit=False) 
+            obj.user = User.objects.get(pk=request.user.id)
+            obj.save() 
+            return redirect ('dashboard')
+
+    context = {'form': form}
+    return render(request, 'dashboard/create_review', context)
+
 def logoutUser(request):
-    logout(request)
     logout(request)
     return redirect('login')
 

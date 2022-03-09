@@ -1,5 +1,6 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, modelform_factory
 from .models import Ticket
+from reviews.models import Review
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -7,8 +8,10 @@ from django.contrib.auth.forms import UserCreationForm
 class TicketForm(ModelForm):
     class Meta:
         model = Ticket
-        fields = '__all__'
-
+        fields = [
+            'title',
+            'content'
+        ]
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -41,3 +44,8 @@ class LoginForm(ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
         }
+
+class CreateReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = '__all__'
